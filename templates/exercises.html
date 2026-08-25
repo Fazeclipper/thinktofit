@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Exercises — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Exercise library</div>
+      <h2>
+        {% if current_user.is_authenticated and current_user.profile and current_user.profile.fitness_goal %}
+          Recommended for {{ current_user.profile.fitness_goal.label|lower }}
+        {% else %}
+          Browse exercises
+        {% endif %}
+      </h2>
+      <p>Filter by body area, or create an account for recommendations matched to your goal and experience.</p>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;">
+      <a href="{{ url_for('exercises') }}" class="tag" style="{{ 'background:var(--red);color:#0a0a0a;' if not selected_area else '' }}">All</a>
+      {% for area in areas %}
+        <a href="{{ url_for('exercises', area=area) }}" class="tag" style="{{ 'background:var(--red);color:#0a0a0a;' if selected_area == area else '' }}">{{ area.replace('_',' ')|title }}</a>
+      {% endfor %}
+    </div>
+
+    {% for ex in exercises %}
+      <div class="ex-card" style="align-items:flex-start;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;width:100%;align-items:center;">
+          <div class="ex-name">{{ ex.name }}</div>
+          <span class="tag">{{ ex.difficulty|title }}</span>
+        </div>
+        <div class="ex-meta">{{ ex.target_area.replace('_',' ')|title }} · {{ ex.sets }} sets × {{ ex.reps }}{% if ex.rest_seconds %} · Rest {{ ex.rest_seconds }}s{% endif %}</div>
+        <p style="color:var(--text-dim);font-size:14px;">{{ ex.description }}</p>
+        <ol style="color:var(--text-dim);font-size:14px;padding-left:18px;">
+          {% for step in ex.instructions_list() %}<li style="margin-bottom:4px;">{{ step }}</li>{% endfor %}
+        </ol>
+      </div>
+    {% else %}
+      <p style="color:var(--text-faint);">No exercises match this filter yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
