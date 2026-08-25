@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Meal Plans — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Meal plans</div>
+      <h2>Example plans by goal</h2>
+      <p>General examples, not a clinical or personalized diet prescription.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;">
+      <a href="{{ url_for('meal_plans') }}" class="tag" style="{{ 'background:var(--red);color:#0a0a0a;' if not selected_category else '' }}">All</a>
+      <a href="{{ url_for('meal_plans', category='weight_management') }}" class="tag" style="{{ 'background:var(--red);color:#0a0a0a;' if selected_category == 'weight_management' else '' }}">Weight management</a>
+      <a href="{{ url_for('meal_plans', category='general_fitness') }}" class="tag" style="{{ 'background:var(--red);color:#0a0a0a;' if selected_category == 'general_fitness' else '' }}">General fitness</a>
+      <a href="{{ url_for('meal_plans', category='muscle_building') }}" class="tag" style="{{ 'background:var(--red);color:#0a0a0a;' if selected_category == 'muscle_building' else '' }}">Muscle building</a>
+    </div>
+
+    {% for plan in plans %}
+      <div class="pillar" style="margin-bottom:20px;">
+        <div class="num">{{ plan.goal_category.replace('_',' ')|upper }}</div>
+        <h3>{{ plan.name }}</h3>
+        {% for meal in plan.meals %}
+          <p style="color:var(--text-dim);font-size:14px;margin-top:8px;"><strong style="color:var(--text);">{{ meal.meal_type|title }}:</strong> {{ meal.description }}</p>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color:var(--text-faint);">No meal plans found.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

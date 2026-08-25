@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Weight Loss Guidance — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">Weight loss</div>
+      <h2 style="font-size:34px;margin-bottom:16px;">Steady, sustainable habits</h2>
+      <p style="color:var(--text-dim);font-size:15px;margin-bottom:22px;">General principles for healthy weight management — never extreme dieting or unsafe calorie restriction.</p>
+      <ul class="checklist">
+        <li>Regular physical activity and exercise consistency</li>
+        <li>Balanced meals and portion awareness</li>
+        <li>Adequate sleep and hydration</li>
+        <li>Long-term lifestyle change over quick fixes</li>
+      </ul>
+      <div class="disclaimer-box">ThinkToFit provides general fitness and healthy-lifestyle information and is not a substitute for professional medical advice. Consult a qualified healthcare professional before making significant changes to diet or exercise.</div>
+    </div>
+    <div>
+      <div class="eyebrow">Related</div>
+      <div class="ex-card"><div><div class="ex-name">Healthy Eating Guide</div><div class="ex-meta">Balanced meals, explained plainly</div></div><a href="{{ url_for('healthy_eating') }}" class="tag">View</a></div>
+      <div class="ex-card"><div><div class="ex-name">Meal Plans</div><div class="ex-meta">Example plans by goal</div></div><a href="{{ url_for('meal_plans') }}" class="tag">View</a></div>
+      <div class="ex-card"><div><div class="ex-name">BMI Calculator</div><div class="ex-meta">Track your number over time</div></div><a href="{{ url_for('bmi') }}" class="tag">View</a></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
