@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% from '_form_helpers.html' import render_field %}
+{% block title %}Create your account — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap" style="max-width:480px;">
+    <div class="section-head">
+      <div class="eyebrow">Get started</div>
+      <h2>Create your account</h2>
+    </div>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      {{ render_field(form.name) }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.confirm_password) }}
+      {{ form.submit(class_="btn-solid", style="width:100%;text-align:center;border:none;cursor:pointer;") }}
+    </form>
+    <p style="color:var(--text-faint);margin-top:18px;font-size:14px;">Already have an account? <a href="{{ url_for('login') }}" style="color:var(--red);">Log in</a></p>
+  </div>
+</section>
+{% endblock %}

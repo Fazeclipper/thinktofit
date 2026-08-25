@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}ThinkToFit — Eat better. Move more. Check in with real numbers.{% endblock %}
+{% block content %}
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Guidance built for beginners</div>
+      <h1>A clear plan to eat better, move more, and check in with real numbers.</h1>
+      <p class="lead">ThinkToFit pairs simple exercise and nutrition guidance with a BMI tracker and a short questionnaire that fits recommendations to you — no jargon, no guesswork, just a plan built around your goals.</p>
+      <div class="hero-ctas">
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('dashboard') }}" class="btn-solid btn-lg">Go to dashboard</a>
+        {% else %}
+          <a href="{{ url_for('register') }}" class="btn-solid btn-lg">Create your account</a>
+          <a href="{{ url_for('login') }}" class="btn-ghost btn-lg">Log in</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stripe"></div>
+      <div class="card-inner">
+        <h3>What you get</h3>
+        <ul>
+          <li>A BMI calculator that tracks your history over time</li>
+          <li>A short questionnaire so guidance fits your age and activity level</li>
+          <li>Exercise plans organized by goal, body area and experience</li>
+          <li>Meal plan examples for weight loss, muscle gain and general fitness</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div>
+        <h2>Ready to build your plan?</h2>
+        <p>Create a free account, complete the short questionnaire, and get guidance built around your goal.</p>
+      </div>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('dashboard') }}" class="btn-solid btn-lg">Go to dashboard</a>
+      {% else %}
+        <a href="{{ url_for('register') }}" class="btn-solid btn-lg">Create your account</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{% block title %}ThinkToFit{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <a href="{{ url_for('landing') }}" class="logo">THINK<span>TO</span>FIT</a>
+    <div class="nav-links">
+      <a href="{{ url_for('exercises') }}" class="link">Exercises</a>
+      <a href="{{ url_for('meal_plans') }}" class="link">Meal Plans</a>
+      <a href="{{ url_for('bmi') }}" class="link">BMI Calculator</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('dashboard') }}" class="link">Dashboard</a>
+        {% if current_user.is_admin %}<a href="{{ url_for('admin') }}" class="link">Admin</a>{% endif %}
+        <a href="{{ url_for('logout') }}" class="btn-ghost">Log out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="link">Log in</a>
+        <a href="{{ url_for('register') }}" class="btn-solid">Create your account</a>
+      {% endif %}
+    </div>
+  </nav>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="wrap" style="padding-top:20px;">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo" style="margin-bottom:14px;">THINK<span>TO</span>FIT</div>
+        <p style="color:var(--text-faint);font-size:13.5px;max-width:260px;">General fitness information to help you eat better, move more, and stay consistent. Not a medical platform.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="{{ url_for('exercises') }}">Exercises</a>
+        <a href="{{ url_for('weight_loss') }}">Weight Loss</a>
+        <a href="{{ url_for('healthy_eating') }}">Healthy Eating</a>
+        <a href="{{ url_for('meal_plans') }}">Meal Plans</a>
+        <a href="{{ url_for('bmi') }}">BMI Calculator</a>
+      </div>
+      <div class="foot-col">
+        <h4>Account</h4>
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a href="{{ url_for('edit_profile') }}">Edit profile</a>
+          <a href="{{ url_for('logout') }}">Log out</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Log in</a>
+          <a href="{{ url_for('register') }}">Create account</a>
+        {% endif %}
+        <a href="{{ url_for('feedback') }}">Give feedback</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="{{ url_for('privacy') }}">Privacy notice</a>
+        <a href="{{ url_for('disclaimer') }}">Health disclaimer</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 ThinkToFit. General fitness information only — not a substitute for medical advice.</span>
+      <span>Built as an academic project.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
