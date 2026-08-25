@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% from '_form_helpers.html' import render_field %}
+{% block title %}Fitness Needs Questionnaire — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap" style="max-width:560px;">
+    <div class="section-head">
+      <div class="eyebrow">Questionnaire</div>
+      <h2>Tell us about your fitness needs</h2>
+      <p>A couple of quick questions so we can point you to the right guidance.</p>
+    </div>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      {{ render_field(form.main_goal) }}
+      {{ render_field(form.experience) }}
+      {{ render_field(form.frequency) }}
+      {{ render_field(form.interest) }}
+      {{ form.submit(class_="btn-solid", style="width:100%;text-align:center;border:none;cursor:pointer;") }}
+    </form>
+  </div>
+</section>
+{% endblock %}
