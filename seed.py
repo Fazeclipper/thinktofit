@@ -99,6 +99,66 @@ def seed_data():
                 ),
                 sets='3', reps='15-20 per side', rest_seconds=45, goal_tags='general_fitness',
             ),
+            Exercise(
+                name='Superman', target_area='back', difficulty='beginner',
+                description='A bodyweight exercise that strengthens the lower and upper back.',
+                instructions=(
+                    'Lie face down with arms extended in front of you.\n'
+                    'Simultaneously lift your arms, chest and legs a few inches off the floor.\n'
+                    'Hold briefly, then lower with control.'
+                ),
+                sets='3', reps='10-15', rest_seconds=45, goal_tags='general_fitness,muscle_building',
+            ),
+            Exercise(
+                name='Standing Dumbbell Lateral Raise', target_area='shoulders', difficulty='beginner',
+                description='Isolates the shoulders using light dumbbells.',
+                instructions=(
+                    'Stand holding a light dumbbell in each hand at your sides.\n'
+                    'Raise both arms out to the sides until roughly shoulder height.\n'
+                    'Lower with control back to the start.'
+                ),
+                sets='3', reps='10-12', rest_seconds=45, goal_tags='muscle_building,general_fitness',
+            ),
+            Exercise(
+                name='Dumbbell Bicep Curl', target_area='arms', difficulty='beginner',
+                description='A foundational arm exercise for the biceps.',
+                instructions=(
+                    'Stand holding a dumbbell in each hand, arms extended and palms facing forward.\n'
+                    'Curl the weights up toward your shoulders, keeping your elbows close to your body.\n'
+                    'Lower with control back to the start.'
+                ),
+                sets='3', reps='10-12', rest_seconds=45, goal_tags='muscle_building,general_fitness',
+            ),
+            Exercise(
+                name='Tricep Dip', target_area='arms', difficulty='intermediate',
+                description='A bodyweight exercise using a bench or stable chair to build tricep strength.',
+                instructions=(
+                    'Sit on the edge of a bench with hands beside your hips, fingers pointing forward.\n'
+                    'Slide off the edge and lower your body by bending your elbows.\n'
+                    'Push back up until your arms are straight.'
+                ),
+                sets='3', reps='8-12', rest_seconds=60, goal_tags='muscle_building',
+            ),
+            Exercise(
+                name='Mountain Climbers', target_area='full_body', difficulty='beginner',
+                description='A dynamic full-body movement that raises the heart rate while engaging the core.',
+                instructions=(
+                    'Start in a plank position with hands under shoulders.\n'
+                    'Drive one knee toward your chest, then quickly switch legs.\n'
+                    'Keep your hips low and core engaged throughout.'
+                ),
+                sets='3', reps='20-30 sec', rest_seconds=45, goal_tags='weight_loss,general_fitness',
+            ),
+            Exercise(
+                name='Burpee', target_area='full_body', difficulty='intermediate',
+                description='A high-intensity full-body exercise combining a squat, plank and jump.',
+                instructions=(
+                    'From standing, drop into a squat and place your hands on the floor.\n'
+                    'Kick your feet back into a plank position.\n'
+                    'Return your feet to the squat position, then jump up explosively.'
+                ),
+                sets='3', reps='8-12', rest_seconds=60, goal_tags='weight_loss,general_fitness',
+            ),
         ])
 
     if MealPlan.query.count() == 0:
