@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Research Dashboard — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Research view</div>
+      <h2>Aggregated results</h2>
+      <p>Individual responses are not linked to identities in this view.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar"><div class="num">USERS</div><h3>{{ stats.total_users }}</h3><p>Total registered participants</p></div>
+      <div class="pillar"><div class="num">FEEDBACK</div><h3>{{ stats.feedback_count }}</h3><p>Feedback responses collected</p></div>
+      <div class="pillar"><div class="num">SATISFACTION</div><h3>{{ stats.avg_usefulness or '—' }}/5</h3><p>Average usefulness rating</p></div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <h3 style="font-size:22px;margin-bottom:16px;">Main goals</h3>
+      {% for label, count in stats.goal_counts %}
+        <div class="ex-card"><div class="ex-name">{{ label }}</div><span class="tag">{{ count }}</span></div>
+      {% else %}
+        <p style="color:var(--text-faint);">No profile data yet.</p>
+      {% endfor %}
+    </div>
+
+    <div style="margin-top:32px;">
+      <h3 style="font-size:22px;margin-bottom:16px;">Average ratings</h3>
+      <p style="color:var(--text-dim);">Ease of use: {{ stats.avg_ease or '—' }}/5 &nbsp;·&nbsp; Design: {{ stats.avg_design or '—' }}/5 &nbsp;·&nbsp; Usefulness: {{ stats.avg_usefulness or '—' }}/5</p>
+    </div>
+
+    <div style="margin-top:32px;">
+      <h3 style="font-size:22px;margin-bottom:16px;">Recent written feedback</h3>
+      {% for c in comments %}
+        <div class="ex-card"><div class="ex-name">{{ c.comments }}</div></div>
+      {% else %}
+        <p style="color:var(--text-faint);">No written feedback yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
