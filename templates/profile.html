@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% from '_form_helpers.html' import render_field %}
+{% block title %}Your profile — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap" style="max-width:520px;">
+    <div class="section-head">
+      <div class="eyebrow">Your profile</div>
+      <h2>Tell us about you</h2>
+      <p>This helps ThinkToFit tailor exercise and BMI guidance. You can update it anytime.</p>
+    </div>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="row2">
+        {{ render_field(form.age) }}
+        {{ render_field(form.gender) }}
+      </div>
+      <div class="row2">
+        {{ render_field(form.height_cm) }}
+        {{ render_field(form.weight_kg) }}
+      </div>
+      {{ render_field(form.fitness_goal) }}
+      {{ render_field(form.experience_level) }}
+      {{ form.submit(class_="btn-solid", style="width:100%;text-align:center;border:none;cursor:pointer;") }}
+    </form>
+  </div>
+</section>
+{% endblock %}

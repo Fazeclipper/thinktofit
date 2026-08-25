@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Dashboard</div>
+      <h2>Welcome, {{ current_user.name }}</h2>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="num">GOAL</div>
+        <h3>{{ current_user.profile.fitness_goal.label if current_user.profile and current_user.profile.fitness_goal else 'Not set' }}</h3>
+        <p><a href="{{ url_for('edit_profile') }}" style="color:var(--red);">Edit profile →</a></p>
+      </div>
+      <div class="pillar">
+        <div class="num">BMI</div>
+        <h3>{{ latest_bmi.bmi_value if latest_bmi else '—' }}</h3>
+        <p>{{ latest_bmi.category if latest_bmi else 'No record yet' }} — <a href="{{ url_for('bmi') }}" style="color:var(--red);">Calculate →</a></p>
+      </div>
+      <div class="pillar">
+        <div class="num">EXERCISES</div>
+        <h3>Recommended for you</h3>
+        <p><a href="{{ url_for('exercises') }}" style="color:var(--red);">View exercises →</a></p>
+      </div>
+    </div>
+
+    <div class="pillars" style="margin-top:24px;">
+      <div class="pillar">
+        <div class="num">NUTRITION</div>
+        <h3>Meal plans</h3>
+        <p><a href="{{ url_for('meal_plans') }}" style="color:var(--red);">View meal plan →</a></p>
+      </div>
+      <div class="pillar">
+        <div class="num">QUESTIONNAIRE</div>
+        <h3>Fitness needs</h3>
+        <p><a href="{{ url_for('questionnaire') }}" style="color:var(--red);">Complete / retake →</a></p>
+      </div>
+      <div class="pillar">
+        <div class="num">FEEDBACK</div>
+        <h3>Help us improve</h3>
+        <p><a href="{{ url_for('feedback') }}" style="color:var(--red);">Give feedback →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
