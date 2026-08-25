@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% from '_form_helpers.html' import render_field %}
+{% block title %}BMI Calculator — ThinkToFit{% endblock %}
+{% block content %}
+<section class="block" id="bmi">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">BMI calculator</div>
+      <h2>Know your number, understand what it means</h2>
+      <p>For adults 18 and over. BMI is a screening tool, not a diagnosis — it doesn't account for muscle mass, frame or body composition.</p>
+    </div>
+
+    <div class="bmi-panel">
+      <div class="bmi-grid">
+        <div class="bmi-form">
+          <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="row2">
+              {{ render_field(form.weight_kg) }}
+              {{ render_field(form.height_cm) }}
+            </div>
+            {{ form.submit(class_="btn-solid", style="width:100%;text-align:center;border:none;cursor:pointer;") }}
+          </form>
+        </div>
+        <div class="bmi-result">
+          {% if result %}
+            <div class="bmi-value">{{ result.bmi }}</div>
+            <div class="bmi-cat">{{ result.category }}</div>
+            <div class="bmi-note">BMI is a screening measure, not a diagnosis, and doesn't account for muscle mass or body composition. This calculator is intended for adults.</div>
+          {% else %}
+            <div class="bmi-empty">Enter your weight and height to see your BMI.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% if history %}
+    <div style="margin-top:40px;">
+      <h3 style="font-size:22px;margin-bottom:16px;">Your BMI history</h3>
+      {% for record in history %}
+        <div class="ex-card">
+          <div>
+            <div class="ex-name">{{ record.bmi_value }} — {{ record.category }}</div>
+            <div class="ex-meta">{{ record.recorded_at.strftime('%d %b %Y') }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
